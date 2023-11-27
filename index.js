@@ -1,7 +1,9 @@
 const cells = [...document.getElementsByClassName("cell")];
 const playAgainBtn = document.getElementById("play-again-btn");
 let gameMessage = document.getElementById("game-message");
-let playerTurn = 1;
+let playerTurn = Math.ceil(Math.random() * 2);
+if (playerTurn === 1) gameMessage.innerText = "Player one's turn";
+if (playerTurn === 2) gameMessage.innerText = "Player two's turn";
 let isGameActive = true;
 
 const rowsOfThree = [
@@ -36,7 +38,8 @@ const declareDraw = () => {
 };
 
 const resetGame = () => {
-  gameMessage.innerText = "Player one's turn";
+  if (playerTurn === 1) gameMessage.innerText = "Player one's turn";
+  if (playerTurn === 2) gameMessage.innerText = "Player two's turn";
   cells.forEach((cell) => cell.innerText = "");
   playerOneCells = [];
   playerTwoCells = [];
