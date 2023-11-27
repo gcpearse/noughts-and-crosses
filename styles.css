@@ -1,6 +1,7 @@
 body {
   background: rgb(245, 245, 241);
   text-align: center;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 h1 {
@@ -8,13 +9,14 @@ h1 {
   border: 3px solid gray;
   border-radius: 5px;
   padding: 16px 14px;
+  background: white;
   font-family: 'Courier New', Courier, monospace;
 }
 
 #game-message {
   margin: 30px auto;
   font-family: 'Courier New', Courier, monospace;
-  font-size: 20px;
+  font-size: 24px;
   font-weight: bold;
 }
 
@@ -77,20 +79,48 @@ h1 {
   border-left: 2px solid white;
 }
 
-#play-again-btn {
+.endgame-btn {
   margin-top: 30px;
   border: 2px solid gray;
   border-radius: 10px;
+  min-width: 160px;
   padding: 8px 18px;
   background: white;
   font-size: 16px;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
 }
 
-#play-again-btn:hover {
+.endgame-btn:hover {
   background: rgb(231, 230, 230);
   cursor: pointer;
 }
 
-#play-again-btn:active {
+.endgame-btn:active {
   border: 2px solid rgb(239, 238, 238);
+}
+
+#score-header {
+  margin: 30px auto;
+  font-size: 24px;
+}
+
+.scoreboard {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 30px auto;
+  border: 3px solid gray;
+  border-radius: 5px;
+  padding: 10px;
+  background: white;
+  max-width: 280px;
+}
+
+.score-cell {
+  flex: 0 0 50%;
+  line-height: 10px;
+  background: none;
+  height: 10px;
+  font-size: 20px;
+  font-weight: bold;
 }

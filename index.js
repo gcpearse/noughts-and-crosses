@@ -1,9 +1,14 @@
 const cells = [...document.getElementsByClassName("cell")];
 const playAgainBtn = document.getElementById("play-again-btn");
+const resetScoreBtn = document.getElementById("reset-score-btn");
+let playerOneScore = document.getElementById("p1-score");
+let playerTwoScore = document.getElementById("p2-score");
+
 let gameMessage = document.getElementById("game-message");
 let playerTurn = Math.ceil(Math.random() * 2);
 if (playerTurn === 1) gameMessage.innerText = "Player one's turn";
 if (playerTurn === 2) gameMessage.innerText = "Player two's turn";
+
 let isGameActive = true;
 
 const rowsOfThree = [
@@ -47,6 +52,11 @@ const resetGame = () => {
   playAgainBtn.innerText = "Reset game";
 };
 
+const resetScore = () => {
+  playerOneScore.innerText = 0;
+  playerTwoScore.innerText = 0;
+};
+
 cells.forEach((cell) => {
   cell.addEventListener("click", fillCell = (event) => {
     if (playerTurn === 1 && !cell.innerText && isGameActive) {
@@ -57,7 +67,10 @@ cells.forEach((cell) => {
       if (declareWinner() || declareDraw()) {
         isGameActive = false;
         playAgainBtn.innerText = "Play again?";
-        if (declareWinner()) gameMessage.innerText = "Player one wins!";
+        if (declareWinner()) {
+          gameMessage.innerText = "Player one wins!";
+          playerOneScore.innerText++;
+        }
         if (declareDraw()) gameMessage.innerText = "Draw!";
       }
     } else if (playerTurn === 2 && !cell.innerText && isGameActive) {
@@ -68,7 +81,10 @@ cells.forEach((cell) => {
       if (declareWinner() || declareDraw()) {
         isGameActive = false;
         playAgainBtn.innerText = "Play again?";
-        if (declareWinner()) gameMessage.innerText = "Player two wins!";
+        if (declareWinner()) {
+          gameMessage.innerText = "Player two wins!";
+          playerTwoScore.innerText++;
+        }
         if (declareDraw()) gameMessage.innerText = "Draw!";
       }
     }
@@ -76,3 +92,4 @@ cells.forEach((cell) => {
 });
 
 playAgainBtn.addEventListener("click", resetGame);
+resetScoreBtn.addEventListener("click", resetScore);
