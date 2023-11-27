@@ -72,6 +72,8 @@ cells.forEach((cell) => {
   cell.addEventListener("click", fillCell = (event) => {
     if (playerTurn === 1 && !cell.innerText && isGameActive) {
       cell.innerText = "O";
+      cell.style.color = "white";
+      cell.style.textShadow = "0 0 10px #333333";
       playerOneCells.push(event.target.id);
       playerTurn = 2;
       gameMessage.innerText = "Player two's turn";
@@ -87,6 +89,8 @@ cells.forEach((cell) => {
       }
     } else if (playerTurn === 2 && !cell.innerText && isGameActive) {
       cell.innerText = "X";
+      cell.style.color = "black";
+      cell.style.textShadow = "0 0 10px white";
       playerTwoCells.push(event.target.id);
       playerTurn = 1;
       gameMessage.innerText = "Player one's turn";

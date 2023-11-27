@@ -38,6 +38,7 @@ h1 {
   height: 120px;
   font-size: 70px;
   text-shadow: 0 0 10px white;
+  color: black;
   cursor: pointer;
 }
 
