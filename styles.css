@@ -1,0 +1,96 @@
+body {
+  background: rgb(245, 245, 241);
+  text-align: center;
+}
+
+h1 {
+  margin: 0 5%;
+  border: 3px solid gray;
+  border-radius: 5px;
+  padding: 16px 14px;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+#game-message {
+  margin: 30px auto;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.game-board {
+  display: flex;
+  flex-wrap: wrap;
+  opacity: 75%;
+  margin: auto;
+  background-image: url("/images/wood.jpg");
+  background-size: 100%;
+  border-radius: 20px;
+  max-width: 360px;
+}
+
+.cell {
+  flex: 0 0 33.33%;
+  background: none;
+  border: none;
+  height: 120px;
+  font-size: 70px;
+  text-shadow: 0 0 10px white;
+  cursor: pointer;
+}
+
+#a1,
+#a2,
+#a3 {
+  border-bottom: 2px solid white;
+}
+
+#b1,
+#b2,
+#b3 {
+  border-top: 2px solid white;
+  border-bottom: 2px solid white;
+}
+
+#c1,
+#c2,
+#c3 {
+  border-top: 2px solid white;
+}
+
+#a1,
+#b1,
+#c1 {
+  border-right: 2px solid white;
+}
+
+#a2,
+#b2,
+#c2 {
+  border-left: 2px solid white;
+  border-right: 2px solid white;
+}
+
+#a3,
+#b3,
+#c3 {
+  border-left: 2px solid white;
+}
+
+#play-again-btn {
+  margin-top: 30px;
+  border: 2px solid gray;
+  border-radius: 10px;
+  padding: 8px 18px;
+  background: white;
+  font-size: 16px;
+}
+
+#play-again-btn:hover {
+  background: rgb(231, 230, 230);
+  cursor: pointer;
+}
+
+#play-again-btn:active {
+  border: 2px solid rgb(239, 238, 238);
+}
