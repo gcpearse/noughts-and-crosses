@@ -1,10 +1,15 @@
 const cells = [...document.getElementsByClassName("cell")];
-const playAgainBtn = document.getElementById("play-again-btn");
-const resetScoreBtn = document.getElementById("reset-score-btn");
-let playerOneScore = document.getElementById("p1-score");
-let playerTwoScore = document.getElementById("p2-score");
 
 let gameMessage = document.getElementById("game-message");
+
+const resetGameBtn = document.getElementById("reset-game-btn");
+const resetScoreBtn = document.getElementById("reset-score-btn");
+
+let playerOneScore = document.getElementById("p1-score");
+let playerTwoScore = document.getElementById("p2-score");
+playerOneScore.innerText = localStorage.getItem("p1-count") || 0;
+playerTwoScore.innerText = localStorage.getItem("p2-count") || 0;
+
 let playerTurn = Math.ceil(Math.random() * 2);
 if (playerTurn === 1) gameMessage.innerText = "Player one's turn";
 if (playerTurn === 2) gameMessage.innerText = "Player two's turn";
@@ -25,7 +30,7 @@ const rowsOfThree = [
 let playerOneCells = [];
 let playerTwoCells = [];
 
-const declareWinner = () => {
+const detectWinner = () => {
   for (let row of rowsOfThree) {
     let playerOneCount = 0;
     let playerTwoCount = 0;
@@ -38,8 +43,8 @@ const declareWinner = () => {
   return false;
 };
 
-const declareDraw = () => {
-  return playerOneCells.length + playerTwoCells.length === 9 && !declareWinner();
+const detectDraw = () => {
+  return playerOneCells.length + playerTwoCells.length === 9 && !detectWinner();
 };
 
 const resetGame = () => {
@@ -49,12 +54,18 @@ const resetGame = () => {
   playerOneCells = [];
   playerTwoCells = [];
   isGameActive = true;
-  playAgainBtn.innerText = "Reset game";
+  resetGameBtn.innerText = "Reset game";
+};
+
+const setLocalStorage = () => {
+  localStorage.setItem("p1-count", playerOneScore.innerText);
+  localStorage.setItem("p2-count", playerTwoScore.innerText);
 };
 
 const resetScore = () => {
   playerOneScore.innerText = 0;
   playerTwoScore.innerText = 0;
+  localStorage.clear();
 };
 
 cells.forEach((cell) => {
@@ -64,32 +75,34 @@ cells.forEach((cell) => {
       playerOneCells.push(event.target.id);
       playerTurn = 2;
       gameMessage.innerText = "Player two's turn";
-      if (declareWinner() || declareDraw()) {
+      if (detectWinner() || detectDraw()) {
         isGameActive = false;
-        playAgainBtn.innerText = "Play again?";
-        if (declareWinner()) {
+        resetGameBtn.innerText = "Play again?";
+        if (detectWinner()) {
           gameMessage.innerText = "Player one wins!";
           playerOneScore.innerText++;
         }
-        if (declareDraw()) gameMessage.innerText = "Draw!";
+        if (detectDraw()) gameMessage.innerText = "Draw!";
+        setLocalStorage();
       }
     } else if (playerTurn === 2 && !cell.innerText && isGameActive) {
       cell.innerText = "X";
       playerTwoCells.push(event.target.id);
       playerTurn = 1;
       gameMessage.innerText = "Player one's turn";
-      if (declareWinner() || declareDraw()) {
+      if (detectWinner() || detectDraw()) {
         isGameActive = false;
-        playAgainBtn.innerText = "Play again?";
-        if (declareWinner()) {
+        resetGameBtn.innerText = "Play again?";
+        if (detectWinner()) {
           gameMessage.innerText = "Player two wins!";
           playerTwoScore.innerText++;
         }
-        if (declareDraw()) gameMessage.innerText = "Draw!";
+        if (detectDraw()) gameMessage.innerText = "Draw!";
+        setLocalStorage();
       }
     }
   });
 });
 
-playAgainBtn.addEventListener("click", resetGame);
+resetGameBtn.addEventListener("click", resetGame);
 resetScoreBtn.addEventListener("click", resetScore);
